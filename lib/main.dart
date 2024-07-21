@@ -1,6 +1,6 @@
-import 'package:flutter/cupertino.dart';
+import 'package:application/widget/CustomButton.dart';
+import 'package:application/widget/CustomTextField.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 void main() {
   runApp(const MyApp());
@@ -32,6 +32,7 @@ class _HomePageState extends State<HomePage> {
   final TextEditingController firstNumberController = TextEditingController();
   final TextEditingController secondNumberController = TextEditingController();
   String result = "";
+  
 
   @override
   void dispose() {
@@ -112,9 +113,9 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                       const SizedBox(height: 10),
-                      InputFirstNumber(myController: firstNumberController),
+                      CustomTextField(myController: firstNumberController, text: "First Number"),
                       const SizedBox(height: 10),
-                      InputSecondNumber(myController: secondNumberController),
+                      CustomTextField(myController: secondNumberController, text: "Second Number"),
                       const SizedBox(height: 10),
                       Container(
                         width: 200,
@@ -140,13 +141,13 @@ class _HomePageState extends State<HomePage> {
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      plusButton(onPressed: () => calculator("+")),
+                      Custombutton(onPressed: () => calculator("+"), text: "+"),
                       const SizedBox(height: 10),
-                      MinusButton(onPressed: () => calculator("-")),
+                      Custombutton(onPressed: () => calculator("-"), text: "-"),
                       const SizedBox(height: 10),
-                      DivideButton(onPressed: () => calculator("/")),
+                      Custombutton(onPressed: () => calculator("/"), text: "/"),
                       const SizedBox(height: 10),
-                      MultiplyButton(onPressed: () => calculator("*")),
+                      Custombutton(onPressed: () => calculator("*"), text: "*")
                     ],
                   ),
                 ],
@@ -159,171 +160,3 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-class InputFirstNumber extends StatelessWidget {
-  const InputFirstNumber({super.key, required this.myController});
-  final TextEditingController myController;
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: SizedBox(
-        width: 200.0,
-        child: Container(
-          height: 50,
-          child: TextField(
-            controller: myController,
-            textAlign: TextAlign.left,
-            style: const TextStyle(
-              color: Colors.greenAccent,
-              fontFamily: 'monospace',
-            ),
-            decoration: InputDecoration(
-              filled: true,
-              fillColor: Colors.black,
-              hintText: "First Number",
-              hintStyle: const TextStyle(
-                color: Colors.greenAccent,
-                fontFamily: 'monospace',
-              ),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide.none,
-              ),
-            ),
-            keyboardType: TextInputType.numberWithOptions(decimal: true),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class InputSecondNumber extends StatelessWidget {
-  const InputSecondNumber({super.key, required this.myController});
-  final TextEditingController myController;
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: SizedBox(
-        width: 200.0,
-        child: Container(
-          height: 50,
-          child: TextField(
-            controller: myController,
-            textAlign: TextAlign.left,
-            style: const TextStyle(
-              color: Colors.greenAccent,
-              fontFamily: 'monospace',
-            ),
-            decoration: InputDecoration(
-              filled: true,
-              fillColor: Colors.black,
-              hintText: "Second Number",
-              hintStyle: const TextStyle(
-                color: Colors.greenAccent,
-                fontFamily: 'monospace',
-              ),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide.none,
-              ),
-            ),
-            keyboardType: TextInputType.numberWithOptions(decimal: true),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class plusButton extends StatefulWidget {
-  const plusButton({super.key, required this.onPressed});
-  final VoidCallback onPressed;
-
-  @override
-  State<plusButton> createState() => _plusButtonState();
-}
-
-class _plusButtonState extends State<plusButton> {
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-          minimumSize: const Size(50, 50),
-          textStyle: const TextStyle(fontSize: 20),
-          backgroundColor: Color.fromARGB(255, 100, 100, 100),
-          foregroundColor: const Color.fromARGB(255, 0, 0, 0)),
-      onPressed: widget.onPressed,
-      child: const Text("+"),
-    );
-  }
-}
-
-class MinusButton extends StatefulWidget {
-  const MinusButton({super.key, required this.onPressed});
-  final VoidCallback onPressed;
-
-  @override
-  State<MinusButton> createState() => _MinusButtonState();
-}
-
-class _MinusButtonState extends State<MinusButton> {
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-          minimumSize: const Size(50, 50),
-          textStyle: const TextStyle(fontSize: 20),
-          backgroundColor: Color.fromARGB(255, 100, 100, 100),
-          foregroundColor: const Color.fromARGB(255, 0, 0, 0)),
-      onPressed: widget.onPressed,
-      child: const Text("-"),
-    );
-  }
-}
-
-class DivideButton extends StatefulWidget {
-  const DivideButton({super.key, required this.onPressed});
-  final VoidCallback onPressed;
-
-  @override
-  State<DivideButton> createState() => _DivideButtonState();
-}
-
-class _DivideButtonState extends State<DivideButton> {
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-          minimumSize: const Size(50, 50),
-          textStyle: const TextStyle(fontSize: 20),
-          backgroundColor: Color.fromARGB(255, 100, 100, 100),
-          foregroundColor: const Color.fromARGB(255, 0, 0, 0)),
-      onPressed: widget.onPressed,
-      child: const Text("/"),
-    );
-  }
-}
-
-class MultiplyButton extends StatefulWidget {
-  const MultiplyButton({super.key, required this.onPressed});
-  final VoidCallback onPressed;
-  @override
-  State<MultiplyButton> createState() => _MultiplyButtonState();
-}
-
-class _MultiplyButtonState extends State<MultiplyButton> {
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-          minimumSize: const Size(50, 50),
-          textStyle: const TextStyle(fontSize: 20),
-          backgroundColor: Color.fromARGB(255, 100, 100, 100),
-          foregroundColor: const Color.fromARGB(255, 0, 0, 0)),
-      onPressed: widget.onPressed,
-      child: const Text("x"),
-    );
-  }
-}
