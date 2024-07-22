@@ -1,6 +1,7 @@
-import 'package:application/widget/CustomButton.dart';
-import 'package:application/widget/CustomTextField.dart';
+import 'package:application/Screens/AssignmentOne.dart';
+import 'package:application/Screens/AssignmentTwo.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,7 +11,12 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return  MaterialApp(
+      initialRoute: '/',
+      routes: {
+        '/assignmentOne': (context) => const AssignmentOne(),
+        '/assignmentTwo': (context) => const Assignmenttwo(),
+        },
       title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
@@ -29,133 +35,53 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final TextEditingController firstNumberController = TextEditingController();
-  final TextEditingController secondNumberController = TextEditingController();
-  String result = "";
-  
-
-  @override
-  void dispose() {
-    firstNumberController.dispose();
-    secondNumberController.dispose();
-    super.dispose();
-  }
-
-  void calculator(String calculation) {
-    final firstNumber = double.tryParse(firstNumberController.text);
-    final secondNumber = double.tryParse(secondNumberController.text);
-    double operationResult = 0;
-
-    if (firstNumber == null || secondNumber == null) {
-      setState(() {
-        result = "Invalid";
-      });
-      return;
-    }
-
-    switch (calculation) {
-      case "+":
-        operationResult = firstNumber + secondNumber;
+  void screen(String choice){
+    switch (choice) {
+      case "1":
+        Navigator.pushNamed(context, '/assignmentOne');
         break;
-      case "-":
-        operationResult = firstNumber - secondNumber;
-        break;
-      case "/":
-        if (firstNumber == 0 || secondNumber == 0) {
-          setState(() {
-            result = "Invalid";
-          });
-        }
-        operationResult = firstNumber / secondNumber;
-        break;
-      case "*":
-        operationResult = firstNumber * secondNumber;
-        break;
+      case "2":
+        Navigator.pushNamed(context, '/assignmentTwo');
+      break;
       default:
-        return;
     }
-    setState(() {
-      result = operationResult.toString();
-    });
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black12,
       appBar: AppBar(
         title: const Text("Assignment"),
         backgroundColor: Colors.blue,
       ),
-      body: Container(
+      body:   Container(
         color: Colors.white,
         child: Center(
-          child: Container(
-            alignment: Alignment.center,
-            height: 250,
-            width: 400,
-            decoration: BoxDecoration(
-              color: const Color.fromARGB(255, 166, 169, 177),
-              borderRadius: BorderRadius.circular(15),
-              border: Border.all(color: Colors.black, width: 2),
-            ),
-            child: Wrap(children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Column(
-                    children: <Widget>[
-                      const Text(
-                        "DIGI-CAL",
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const SizedBox(height: 10),
-                      CustomTextField(myController: firstNumberController, text: "First Number"),
-                      const SizedBox(height: 10),
-                      CustomTextField(myController: secondNumberController, text: "Second Number"),
-                      const SizedBox(height: 10),
-                      Container(
-                        width: 200,
-                        decoration: BoxDecoration(
-                          color: Colors.black,
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        padding: const EdgeInsets.all(10),
-                        child: Text(
-                          "RESULT: $result",
-                          style: const TextStyle(
-                            fontSize: 15,
-                            color: Colors.greenAccent,
-                            fontFamily: 'monospace',
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    width: 50,
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Custombutton(onPressed: () => calculator("+"), text: "+"),
-                      const SizedBox(height: 10),
-                      Custombutton(onPressed: () => calculator("-"), text: "-"),
-                      const SizedBox(height: 10),
-                      Custombutton(onPressed: () => calculator("/"), text: "/"),
-                      const SizedBox(height: 10),
-                      Custombutton(onPressed: () => calculator("*"), text: "*")
-                    ],
-                  ),
-                ],
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+            ElevatedButton(
+              onPressed: () => screen("1"),
+              style: ElevatedButton.styleFrom(
+                minimumSize: const Size(200, 50),
+                textStyle: const TextStyle(fontSize: 20),
+                backgroundColor: const Color.fromARGB(255, 100, 100, 100),
+                foregroundColor:const Color.fromARGB(255, 0, 0, 0)
+                ), 
+              child: const Text("Assignment One"),
               ),
-            ]),
-          ),
-        ),
+            const SizedBox(height: 20,),
+            ElevatedButton(
+              onPressed: () => screen("2"), 
+              style: ElevatedButton.styleFrom(
+                minimumSize: const Size(200, 50),
+                textStyle: const TextStyle(fontSize: 20),
+                backgroundColor: const Color.fromARGB(255, 100, 100, 100),
+                foregroundColor:const Color.fromARGB(255, 0, 0, 0)
+                ), 
+              child: const Text("Assignment Two")),
+          ],),
       ),
+    )
     );
   }
 }
