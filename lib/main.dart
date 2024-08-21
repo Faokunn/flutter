@@ -1,5 +1,6 @@
 import 'package:application/Screens/AssignmentOne.dart';
 import 'package:application/Screens/AssignmentTwo.dart';
+import 'package:application/Screens/AssignmentThree/Read.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -16,6 +17,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/assignmentOne': (context) => const AssignmentOne(),
         '/assignmentTwo': (context) => const Assignmenttwo(),
+        '/assignmentThree': (context) => const ReadRequest(),
         },
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -43,6 +45,9 @@ class _HomePageState extends State<HomePage> {
       case "2":
         Navigator.pushNamed(context, '/assignmentTwo');
       break;
+      case "3":
+        Navigator.pushNamed(context, '/assignmentThree');
+      break;
       default:
     }
   }
@@ -69,7 +74,6 @@ class _HomePageState extends State<HomePage> {
                 ), 
               child: const Text("Assignment One"),
               ),
-            const SizedBox(height: 20,),
             ElevatedButton(
               onPressed: () => screen("2"), 
               style: ElevatedButton.styleFrom(
@@ -78,7 +82,17 @@ class _HomePageState extends State<HomePage> {
                 backgroundColor: const Color.fromARGB(255, 100, 100, 100),
                 foregroundColor:const Color.fromARGB(255, 0, 0, 0)
                 ), 
-              child: const Text("Assignment Two")),
+              child: const Text("Assignment Two")
+              ),
+            ElevatedButton(
+              onPressed: () => screen("3"), 
+              style: ElevatedButton.styleFrom(
+                minimumSize: const Size(200, 50),
+                textStyle: const TextStyle(fontSize: 20),
+                backgroundColor: const Color.fromARGB(255, 100, 100, 100),
+                foregroundColor:const Color.fromARGB(255, 0, 0, 0)
+                ), 
+              child: const Text("Assignment Three")),
           ],),
       ),
     )
